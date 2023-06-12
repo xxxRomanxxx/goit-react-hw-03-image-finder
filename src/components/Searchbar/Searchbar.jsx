@@ -11,7 +11,8 @@ class Searchbar extends Component {
         if (this.state.searchEl.trim() === '') {
             Notiflix.Notify.info('search bar cannot be empty');
             return 
-          } 
+          }
+          
         this.props.onSubmit(this.state.searchEl);
         this.setState({searchEl: ''})
      }
