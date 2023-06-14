@@ -1,23 +1,33 @@
-import {Component} from "react";
+import React from 'react';
+import css from './ImageGalleryItem.module.css';
+import PropTypes from "prop-types";
 
-class ImageGalleryItem extends Component {
-    state = {  } 
-    render() { 
-        return (
-            <>
-            {this.props.image.map(({id, webformatURL, tags}) => (
-                <li key={id}>
-                  <img src={webformatURL} alt={tags} />
-                </li>
-                ))}
-            </>
-        );
-    }
+const ImageGalleryItem = ({webformatURL, largeImageURL, tags, openModal, toggleOnLoading,}) => {
+  return (
+    <li className={css['gallery__item']}>
+      <img
+        className={css['gallery__item-img']}
+        src={webformatURL}
+        data-large={largeImageURL}
+        alt={tags}
+        onClick={(evt) => {
+          openModal(evt.currentTarget.dataset.large);
+          toggleOnLoading();
+        }}
+      />
+    </li>
+  );
 }
- 
+
 export default ImageGalleryItem;
 
-
+ImageGalleryItem.propTypes = {
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  toggleOnLoading: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
+};
 
     
 
